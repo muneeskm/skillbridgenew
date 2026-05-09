@@ -36,8 +36,8 @@
                     </div>
                     
                     <!-- Smoke & Mirrors: The form submission redirects to the job board -->
-                    <form onsubmit="event.preventDefault(); alert('Login successful! Welcome back to Skill Bridge.'); window.location.href='{% url 'jobs' %}';">
-                        
+                    <form onsubmit="event.preventDefault(); alert('Login successful! Welcome back to Skill Bridge.'); window.location.href=`{% url 'jobs' %}`;">
+
                         <div class="mb-3">
                             <label class="form-label fw-bold">Phone Number or Email</label>
                             <input type="text" class="form-control form-control-lg" placeholder="Enter your details" required>
