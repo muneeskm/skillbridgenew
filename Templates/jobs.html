@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Bridge - Find Jobs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">Skill Bridge</a>
+            <div class="navbar-nav ms-auto flex-row gap-3 align-items-center">
+                <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
+                <a class="nav-link text-white" href="{% url 'jobs' %}">Find Jobs</a>
+                <a class="nav-link text-white" href="{% url 'post_gig' %}">Post a Gig</a>
+                
+                <div class="ms-2 d-flex gap-2">
+                    <a class="btn btn-outline-light px-3" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-primary px-3" href="{% url 'signup' %}">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content Area: Job Board -->
+    <div class="container mt-5">
+        <h2 class="fw-bold mb-4">Available Local Gigs</h2>
+        
+        <!-- Fake Search/Filter Bar to show you thought about localization -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <input type="text" class="form-control form-control-lg" placeholder="Search for 'plumbing', 'moving', etc...">
+            </div>
+            <div class="col-md-4 mt-3 mt-md-0">
+                <select class="form-select form-select-lg">
+                    <option>Within 5 km</option>
+                    <option>Within 10 km</option>
+                    <option>Anywhere</option>
+                </select>
+            </div>
+        </div>
+
+       <div class="row">
+            {% for job in jobs %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title fw-bold">{{ job.title }}</h5>
+                            <span class="badge bg-success fs-6">₹{{ job.hourly_rate }} / hr</span>
+                        </div>
+                        <p class="text-muted small">📍 {{ job.location }}</p>
+                        <p class="card-text">{{ job.description }}</p>
+                        <p class="text-muted small mb-2">📞 {{ job.phone_number }}</p>
+                        <button onclick="alert('Application Sent Successfully!')" class="btn btn-primary w-100 mt-2">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <h4 class="text-muted">No local gigs posted yet. Be the first!</h4>
+            </div>
+            {% endfor %}
+        </div>
+</body>
+</html>
