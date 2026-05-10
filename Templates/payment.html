@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="{% static 'payment.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>DETAILS</h1></center>
+    
+
+<div class="customer-box">
+
+    
+
+    <h2>Job Details</h2>
+    <ol>
+        <li>{{ job.title }}</li>
+        <li>{{ job.description }}</li>
+        <li>₹{{ job.hourly_rate }} / hr</li>
+
+    </ol>
+    <h2>Customer Details</h2>
+        <ol>
+            <li>Name: {{ job.customer_name }}</li>
+            <li>Phone: {{ job.phone_number }}</li>
+
+    <div class="detail-row">
+        
+        <button class="location" id="showLocationBtn">
+    Show Customer Location
+</button>
+        <strong></strong>
+        <span></span>
+    </div>
+
+    <div class="detail-row">
+        <strong></strong>
+        <span></span>
+    </div>
+
+</div>
+<script src="{% static 'payment.js' %}"></script>
+</body>
+</html>

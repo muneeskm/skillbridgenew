@@ -1,5 +1,7 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +13,32 @@
     <!-- Navigation Bar -->
     <!-- Navigation Bar -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- ANIMATED WORKERS -->
+
+<div class="worker worker1">👷</div>
+<div class="worker worker2">🧑‍💻</div>
+<div class="worker worker3">🛠️</div>
+<div class="worker worker4">🚚</div>
+<div class="worker worker5">👨‍🔧</div>
+<div class="worker worker6">👩‍💼</div>
+<div class="worker worker7">🧹</div>
+<div class="worker worker8">📦</div>
+<div class="worker worker9">🔨</div>
+<div class="worker worker10">⚙️</div>
+
+<div class="floating-icon icon1">💼</div>
+<div class="floating-icon icon2">📍</div>
+<div class="floating-icon icon3">💰</div>
+<div class="floating-icon icon4">⚡</div>
+<div class="floating-icon icon5">🛠️</div>
+<div class="floating-icon icon6">📦</div>
+
+<!-- FLOATING ICONS -->
+
+<div class="floating-icon icon1">💼</div>
+<div class="floating-icon icon2">📍</div>
+<div class="floating-icon icon3">💰</div>
+<div class="floating-icon icon4">⚡</div>
         <div class="container">
             <a class="navbar-brand fw-bold" href="{% url 'home' %}">Skill Bridge</a>
             <div class="navbar-nav ms-auto flex-row gap-3 align-items-center">
@@ -35,7 +63,8 @@
                 <h1 class="display-4 fw-bold mb-3">Localized Temporary Labor, Simplified.</h1>
                 <p class="lead text-muted mb-4">Skill Bridge connects individuals looking for flexible, immediate income with local households and businesses that need quick, reliable help for everyday tasks.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <a href="{% url 'jobs' %}" class="btn btn-primary btn-lg px-4 gap-3">I Want to Work</a>
+                    <a href="{% url 'jobs' %}" class="btn btn-primary btn-lg px-4 gap-3"  >I Want to Work</a>
+                    
                     <a href="{% url 'post_gig' %}" class="btn btn-outline-secondary btn-lg px-4 bg-white">I Need Help</a>
                 </div>
             </div>

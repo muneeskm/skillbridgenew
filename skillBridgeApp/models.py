@@ -8,6 +8,7 @@ class Job(models.Model):
     location = models.CharField(max_length=200, default="Local Area")
     phone_number = models.CharField(max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
@@ -30,3 +31,10 @@ class Login(models.Model):
 
     def __str__(self):
         return self.email
+    
+class Location(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

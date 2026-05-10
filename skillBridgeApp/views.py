@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Job, Signup  
+from .models import Job, Signup 
 
 # Create your views here.
 def home(request):
@@ -20,16 +20,18 @@ def post_gig(request):
         job_description = request.POST.get('description')
         job_rate = request.POST.get('hourly_rate')
         job_phone = request.POST.get('phone_number')
-        
+        location = request.POST.get('location')
+
         # 2. Save it to the Database!
-        Job.objects.create(
+        job = Job.objects.create(
             title=job_title,
             description=job_description,
             hourly_rate=job_rate,
-            phone_number=job_phone
+            phone_number=job_phone,
+            location=location
         )
         
-        # 3. Redirect the user to the Job Board
+        # 3. Redirect the user to the payment page
         return redirect('jobs')
         
     # If they are just visiting the page normally, show them the blank form
@@ -63,3 +65,11 @@ def signup(request):
 
     # If they are just visiting the page normally, show them the blank form
     return render(request, 'signup.html')
+
+def payment(request, pk=None):
+    if pk:
+        job = Job.objects.get(id=pk)
+        return render(request, 'payment.html', {'job': job})
+    else:
+        return render(request, 'payment.html', {'job': None})
+    

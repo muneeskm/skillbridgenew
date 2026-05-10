@@ -1,0 +1,123 @@
+/* MANY MOVING WORKERS */
+
+.worker{
+    position: fixed;
+    font-size: 65px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.5));
+}
+
+/* DIFFERENT WORKERS */
+
+.worker1{ top:10%; left:-10%; animation: move1 18s linear infinite; }
+.worker2{ top:20%; right:-10%; animation: move2 22s linear infinite; }
+.worker3{ bottom:15%; left:-10%; animation: move3 20s linear infinite; }
+.worker4{ top:50%; right:-10%; animation: move4 24s linear infinite; }
+.worker5{ bottom:5%; left:20%; animation: move5 19s linear infinite; }
+.worker6{ top:70%; left:-10%; animation: move6 26s linear infinite; }
+.worker7{ top:30%; left:40%; animation: move7 17s linear infinite; }
+.worker8{ bottom:20%; right:-10%; animation: move8 21s linear infinite; }
+.worker9{ top:5%; left:60%; animation: move9 23s linear infinite; }
+.worker10{ bottom:40%; left:-10%; animation: move10 27s linear infinite; }
+
+/* RANDOM MOVEMENTS */
+
+@keyframes move1{
+    0%{ transform: translate(0,0) rotate(0deg); }
+    25%{ transform: translate(40vw,10vh) rotate(10deg); }
+    50%{ transform: translate(80vw,-5vh) rotate(-10deg); }
+    100%{ transform: translate(120vw,20vh) rotate(0deg); }
+}
+
+@keyframes move2{
+    0%{ transform: translate(0,0) rotateY(180deg); }
+    25%{ transform: translate(-30vw,20vh) rotateY(180deg); }
+    50%{ transform: translate(-70vw,-10vh) rotateY(180deg); }
+    100%{ transform: translate(-120vw,15vh) rotateY(180deg); }
+}
+
+@keyframes move3{
+    0%{ transform: translate(0,0); }
+    30%{ transform: translate(30vw,-20vh); }
+    60%{ transform: translate(70vw,15vh); }
+    100%{ transform: translate(120vw,-10vh); }
+}
+
+@keyframes move4{
+    0%{ transform: translate(0,0) rotateY(180deg); }
+    25%{ transform: translate(-20vw,-15vh) rotateY(180deg); }
+    50%{ transform: translate(-60vw,20vh) rotateY(180deg); }
+    100%{ transform: translate(-120vw,-5vh) rotateY(180deg); }
+}
+
+@keyframes move5{
+    0%{ transform: translate(0,0); }
+    50%{ transform: translate(50vw,-30vh) scale(1.2); }
+    100%{ transform: translate(100vw,10vh); }
+}
+
+@keyframes move6{
+    0%{ transform: translate(0,0); }
+    25%{ transform: translate(20vw,-20vh); }
+    50%{ transform: translate(60vw,10vh); }
+    100%{ transform: translate(120vw,-15vh); }
+}
+
+@keyframes move7{
+    0%{ transform: translate(0,0); }
+    20%{ transform: translate(-20vw,15vh); }
+    50%{ transform: translate(30vw,-10vh); }
+    100%{ transform: translate(-50vw,25vh); }
+}
+
+@keyframes move8{
+    0%{ transform: translate(0,0) rotateY(180deg); }
+    50%{ transform: translate(-60vw,-25vh) rotateY(180deg); }
+    100%{ transform: translate(-120vw,10vh) rotateY(180deg); }
+}
+
+@keyframes move9{
+    0%{ transform: translate(0,0); }
+    50%{ transform: translate(-40vw,30vh) rotate(20deg); }
+    100%{ transform: translate(20vw,60vh); }
+}
+
+@keyframes move10{
+    0%{ transform: translate(0,0); }
+    50%{ transform: translate(80vw,-20vh) scale(0.8); }
+    100%{ transform: translate(120vw,20vh); }
+}
+
+/* FLOATING JOB ICONS */
+
+.floating-icon{
+    position: fixed;
+    font-size: 40px;
+    z-index: 0;
+    opacity: 0.6;
+    animation: floatAround 8s ease-in-out infinite;
+}
+
+.icon1{ top:15%; left:10%; }
+.icon2{ top:70%; left:20%; }
+.icon3{ top:40%; left:80%; }
+.icon4{ top:80%; left:60%; }
+.icon5{ top:25%; left:50%; }
+.icon6{ top:55%; left:35%; }
+
+@keyframes floatAround{
+    0%{ transform: translateY(0px) rotate(0deg); }
+    50%{ transform: translateY(-30px) rotate(15deg); }
+    100%{ transform: translateY(0px) rotate(0deg); }
+}
+
+/* KEEP CONTENT ABOVE */
+
+.container,
+.card,
+.navbar{
+    position: relative;
+    z-index: 5;
+}
