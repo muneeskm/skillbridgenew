@@ -121,3 +121,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'skillBridgeApp.auth_backends.UsernameOrEmailBackend',
 ]
+LOGIN_REDIRECT_URL = '/profile/'
+LOGOUT_REDIRECT_URL = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -11,20 +11,46 @@
     <!-- Navigation Bar -->
     <!-- Navigation Bar -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="{% url 'home' %}">Skill Bridge</a>
-            <div class="navbar-nav ms-auto flex-row gap-3 align-items-center">
-                <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
-                <a class="nav-link text-white" href="{% url 'jobs' %}">Find Jobs</a>
-                <a class="nav-link text-white" href="{% url 'post_gig' %}">Post a Gig</a>
-                
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">Skill Bridge</a>
+
+        <div class="navbar-nav ms-auto flex-row gap-3 align-items-center">
+
+            <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
+            <a class="nav-link text-white" href="{% url 'jobs' %}">Find Jobs</a>
+            <a class="nav-link text-white" href="{% url 'post_gig' %}">Post a Gig</a>
+
+            {% if user.is_authenticated %}
+
+                <a class="nav-link text-info fw-bold" href="{% url 'profile' %}">
+                    Hello, {{ user.username }}
+                </a>
+
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger px-3">
+                        Logout
+                    </button>
+                </form>
+
+            {% else %}
+
                 <div class="ms-2 d-flex gap-2">
-                    <a class="btn btn-outline-light px-3" href="{% url 'login' %}">Login</a>
-                    <a class="btn btn-primary px-3" href="{% url 'signup' %}">Sign Up</a>
+                    <a class="btn btn-outline-light px-3" href="{% url 'login' %}">
+                        Login
+                    </a>
+                    <a class="btn btn-primary px-3" href="{% url 'signup' %}">
+                        Sign Up
+                    </a>
                 </div>
-            </div>
+
+            {% endif %}
+
         </div>
-    </nav>
+
+    </div>
+</nav>
     <!-- Main Content Area: Job Board -->
     <div class="container mt-5">
         <h2 class="fw-bold mb-4">Available Local Gigs</h2>

@@ -13,4 +13,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('u/<str:username>/', views.public_profile, name='public_profile'),
+    path('logout/', views.custom_logout, name='logout'),
 ]
