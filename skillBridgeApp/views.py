@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Job  
+from .models import Job, Signup  
 
 # Create your views here.
 def home(request):
@@ -41,4 +41,25 @@ def login_view(request):
     return render(request, 'login.html')
 
 def signup(request):
+    if request.method == 'POST':
+        # 1. Grab the data the user typed into the form
+        signup_first_name = request.POST.get('first_name')
+        signup_last_name = request.POST.get('last_name')
+        signup_phone_number = request.POST.get('phone_number')
+        signup_email = request.POST.get('email')
+        signup_password = request.POST.get('password')
+
+        # 2. Save it to the Database!
+        Signup.objects.create(
+            first_name=signup_first_name,
+            last_name=signup_last_name,
+            phone_number=signup_phone_number,
+            email=signup_email,
+            password=signup_password
+        )
+
+        # 3. Redirect the user to the Job Board
+        return redirect('jobs')
+
+    # If they are just visiting the page normally, show them the blank form
     return render(request, 'signup.html')
