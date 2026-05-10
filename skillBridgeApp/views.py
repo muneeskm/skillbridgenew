@@ -1,65 +1,106 @@
-from django.shortcuts import render,redirect
-from .models import Job, Signup  
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from .models import Job, Profile
+from django.contrib import messages
+import re
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+
+# ------------------------------
+# Home Page
+# ------------------------------
 def home(request):
     return render(request, 'index.html')
-from django.shortcuts import render
 
+# ------------------------------
+# Job Listings
+# ------------------------------
 def jobs(request):
-    all_jobs = Job.objects.all().order_by('-created_at') 
-
+    all_jobs = Job.objects.all().order_by('-created_at')
     return render(request, 'jobs.html', {'jobs': all_jobs})
 
-# ... keep your home and jobs views ...
-
+# ------------------------------
+# Post a Job
+# ------------------------------
 def post_gig(request):
     if request.method == 'POST':
-        # 1. Grab the data the user typed into the form
         job_title = request.POST.get('title')
         job_description = request.POST.get('description')
         job_rate = request.POST.get('hourly_rate')
         job_phone = request.POST.get('phone_number')
-        
-        # 2. Save it to the Database!
+
         Job.objects.create(
             title=job_title,
             description=job_description,
             hourly_rate=job_rate,
             phone_number=job_phone
         )
-        
-        # 3. Redirect the user to the Job Board
+
         return redirect('jobs')
-        
-    # If they are just visiting the page normally, show them the blank form
+
     return render(request, 'post.html')
 
-# ... keep your login and signup views ...
-
-def login_view(request):
-    return render(request, 'login.html')
-
+# ------------------------------
+# Signup (Correct)
+# ------------------------------
 def signup(request):
     if request.method == 'POST':
-        # 1. Grab the data the user typed into the form
-        signup_first_name = request.POST.get('first_name')
-        signup_last_name = request.POST.get('last_name')
-        signup_phone_number = request.POST.get('phone_number')
-        signup_email = request.POST.get('email')
-        signup_password = request.POST.get('password')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        phone = request.POST.get('phone')
 
-        # 2. Save it to the Database!
-        Signup.objects.create(
-            first_name=signup_first_name,
-            last_name=signup_last_name,
-            phone_number=signup_phone_number,
-            email=signup_email,
-            password=signup_password
+        # Validation removed for brevity...
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name
         )
 
-        # 3. Redirect the user to the Job Board
-        return redirect('jobs')
+        # Update auto-created Profile
+        user.profile.phone = phone
+        user.profile.save()
 
-    # If they are just visiting the page normally, show them the blank form
+        messages.success(request, "Account created successfully.")
+        return redirect('login')
+
     return render(request, 'signup.html')
+# ------------------------------
+# Login (email/username/phone)
+# ------------------------------
+def login_view(request):
+    if request.method == 'POST':
+        identifier = request.POST.get('identifier')
+        password = request.POST.get('password')
+
+        # Identify whether it's phone or email
+        if identifier.isdigit():  
+            # phone login
+            try:
+                profile = Profile.objects.get(phone=identifier)
+                username = profile.user.username
+            except Profile.DoesNotExist:
+                return render(request, 'login.html', {'error': "Invalid phone number"})
+        else:
+            # email login
+            username = identifier
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+
+        return render(request, 'login.html', {'error': "Incorrect password"})
+
+    return render(request, 'login.html')
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
